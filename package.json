@@ -1,0 +1,25 @@
+{
+  "name": "challenge-one",
+  "version": "0.0.1",
+  "description": "Challenge 1",
+  "main": "index.js",
+  "scripts": {
+    "start": "sh scripts/setup.sh && node index.js",
+    "lint": "npm run lint:standard",
+    "lint:standard": "eslint",
+    "unit:lab": "lab -c -L -m 0 -a @hapi/code --coverage-exclude index.js",
+    "test": "npm run lint && npm run unit:lab"
+  },
+  "author": "Roxxy Rafael",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "fastify": "^3.25.3",
+    "fastify-sensible": "^3.1.2"
+  },
+  "devDependencies": {
+    "@hapi/code": "^8.0.5",
+    "@hapi/lab": "^24.5.0",
+    "pino-pretty": "^7.3.0"
+  }
+}
