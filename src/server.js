@@ -3,13 +3,13 @@
 
 const Fastify = require('fastify');
 const FastifySensible = require('fastify-sensible');
-const Routes = require('./api');
 const Dotenv = require('dotenv');
+const Routes = require('./api');
+const Db = require('./db');
 
 module.exports = async () => {
 
     Dotenv.config();
-    const API_PREFIX = process.env.API_PREFIX;
 
     // level: trace - log all, error - log only ERROR
     const logger = {
@@ -59,21 +59,8 @@ module.exports = async () => {
         done();
     });
 
-    // Using MongoDB
-    /*
-    await fastify.register(Store, {
-        mapper: 'mongoose',
-        dir: Path.resolve(`${__dirname}/models/operations`),
-        client: config.DB_CLIENT,
-        connection: {
-            host: config.DB_HOST,
-            port: config.DB_PORT,
-            user: config.DB_USER,
-            password: config.DB_PASSWORD,
-            database: config.DB_NAME
-        }
-    });
-    */
+    await Db.connect();
+    fastify.db = Db.operations;
 
     await fastify.register(FastifySensible);
 
@@ -83,6 +70,7 @@ module.exports = async () => {
         fastify.log.info(`Added routes:\n${ fastify.printRoutes() }`);
     });
 
+    const API_PREFIX = process.env.API_PREFIX;
     await fastify.register(Routes, { prefix: API_PREFIX });
 
     try {
@@ -90,6 +78,7 @@ module.exports = async () => {
         fastify.log.info(fastify.initialConfig, 'Intiialized server with config: ');
     }
     catch (err) {
+        await Db.close();
         fastify.log.error(err);
         process.exit(1);
     }

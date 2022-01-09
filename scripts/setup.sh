@@ -3,5 +3,5 @@
 filename=.env
 if [ ! -f $filename ]
 then
-  echo "API_PREFIX=api" >> $filename
+  printf "API_PREFIX=api\nDB_PORT=27017\nDB_NAME=test" >> $filename
 fi
