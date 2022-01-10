@@ -63,6 +63,7 @@ module.exports = async () => {
     fastify.db = Db.operations;
 
     await fastify.register(FastifySensible);
+    await fastify.register(require('fastify-cors'));
 
     fastify.log.info('Setting up routes...');
     await fastify.ready(() => {

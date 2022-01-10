@@ -1,0 +1,12 @@
+.number-stepper {
+  text-align: center;
+  flex: content;
+  display: flex;
+  justify-content: center;
+}
+
+.button-stepper {
+  text-align: center;
+  margin-left: 20px;
+  margin-right: 20px;
+}
