@@ -18,6 +18,9 @@ class NumberService {
         else if (action === 'decrement') {
             return await this.app.db.updateNumber(-1);
         }
+        else if (action === 'reset') {
+            return await this.app.db.resetNumber();
+        }
 
         throw this.app.httpErrors.badRequest('Invalid step action. Value should either be increment or decrement only.');
     }

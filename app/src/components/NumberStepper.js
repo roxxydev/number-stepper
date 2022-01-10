@@ -46,13 +46,20 @@ function NumberStepper() {
 
   return (
     <div className="number-stepper">
-      <button
-          className="button-stepper"
-          onClick={() => { onStepperPress('increment') }}>+</button>
-      {number}
-      <button
-          className="button-stepper"
-          onClick={() => { onStepperPress('decrement') }}>-</button>
+      <div>
+        <button
+            className="button-stepper"
+            onClick={() => { onStepperPress('increment') }}>+</button>
+        {number}
+        <button
+            className="button-stepper"
+            onClick={() => { onStepperPress('decrement') }}>-</button>
+      </div>
+      <div>
+        <button
+          className="button-reset"
+          onClick={() => { onStepperPress('reset') }}>RESET</button>
+      </div>
     </div>
   );
 };

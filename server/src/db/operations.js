@@ -30,7 +30,18 @@ const updateNumber = async (numberToAdd) => {
     return numberDoc.value;
 };
 
+const resetNumber = async () => {
+
+    const NumberModel = Mongoose.model('Number', numberSchema);
+
+    const numberDoc = await NumberModel.findOneAndUpdate({ name: 'number' }, { value: 0 }, {
+        new: true
+    });
+    return numberDoc.value;
+};
+
 module.exports = {
     getCurrentValue,
-    updateNumber
+    updateNumber,
+    resetNumber
 };

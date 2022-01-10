@@ -6,7 +6,7 @@ const numberRoutes = (app, options, done) => {
 
     const numberService = new NumberService(app);
 
-    // POST /step?query={increment or decrement} - Increment or decrement current number value.
+    // POST /step?query={increment, decrement, reset} - Increment or decrement current number value.
     app.post('/step', async (request, reply) => {
 
         const { action } = request.query;
